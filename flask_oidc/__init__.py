@@ -825,7 +825,9 @@ class OpenIDConnect(object):
                     valid_token = False
 
             if valid_token:
-                token_scopes = token_info.get('scope', '').split(' ')
+                token_scopes = token_info.get('scope', '')
+                if not isinstance(token_scopes, list):
+                    token_scopes = token_scopes.split(' ')
             else:
                 token_scopes = []
             has_required_scopes = scopes_required.issubset(
